@@ -21,13 +21,24 @@ public class Node {
     }
 
     public void addEdge(Node node) {
-        if (this.edges.contains(node)) {
+        if (!this.edges.contains(node)) {
             this.edges.add(node);
         }
     }
 
     @Override
     public String toString() {
-        return name;
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        builder.append(this.name);
+        builder.append("] : ");
+
+        this.edges.stream().forEach(node -> {
+            builder.append(node.getName());
+            builder.append(" ");
+
+        });
+
+        return builder.toString();
     }
 }

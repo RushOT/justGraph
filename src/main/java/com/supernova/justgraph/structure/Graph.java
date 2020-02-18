@@ -2,6 +2,7 @@ package com.supernova.justgraph.structure;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Graph {
     private ArrayList<Node> nodes;
@@ -19,9 +20,22 @@ public class Graph {
             return newNode.getName().equals(node.getName());
         });
 
-        if (!hasNode) this.nodes.add(newNode);
+        if (!hasNode)
+            this.nodes.add(newNode);
     }
 
-    public void addEdge(String nodeName) {
+    public Optional<Node> findNodeByName(String name) {
+        return this.nodes.stream().filter(node -> node.getName().equals(name)).findFirst();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        this.nodes.stream().forEach(node -> {
+           builder.append(node);
+           builder.append("\n"); 
+        });
+
+        return builder.toString();
     }
 }
